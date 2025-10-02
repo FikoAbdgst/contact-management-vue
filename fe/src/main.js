@@ -1,5 +1,33 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
+import Layout from './components/Layout.vue'
+import UserRegister from './components/User/UserRegister.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import UserLogin from './components/User/UserLogin.vue'
 
-createApp(App).mount('#app')
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        {
+            component: Layout,
+            children: [
+                {
+                    path: '/register',
+                    component: UserRegister,
+                },
+                {
+                    path: '/login',
+                    component: UserLogin,
+                },
+            ],
+        },
+        {
+            path: '/dashboard',
+        }
+    ],
+})
+
+
+
+createApp(App).use(router).mount('#app')
